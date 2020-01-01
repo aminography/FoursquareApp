@@ -1,10 +1,10 @@
 package com.aminography.foursquareapp.domain
 
-import com.aminography.foursquareapp.data.datasource.remote.webservice.response.venue.VenueDetailsResponseModel
-import com.aminography.foursquareapp.data.datasource.remote.webservice.response.venue.VenueRecommendationsResponseModel
+import com.aminography.foursquareapp.core.tools.formatDistance
 import com.aminography.foursquareapp.data.datasource.local.db.details.VenueDetailsEntity
 import com.aminography.foursquareapp.data.datasource.local.db.venue.VenueEntity
-import com.aminography.foursquareapp.core.tools.formatDistance
+import com.aminography.foursquareapp.data.datasource.remote.webservice.response.venue.VenueDetailsResponseModel
+import com.aminography.foursquareapp.data.datasource.remote.webservice.response.venue.VenueRecommendationsResponseModel
 import com.aminography.foursquareapp.presentation.ui.details.VenueDetailsDataHolder
 import com.aminography.foursquareapp.presentation.ui.venues.dataholder.VenueItemDataHolder
 import java.text.SimpleDateFormat
@@ -61,16 +61,13 @@ fun VenueDetailsResponseModel.toVenueDetailsEntity(locationId: Int) =
             ),
             verified,
             url,
-            if (price != null) {
+            price?.run {
                 VenueDetailsEntity.Price(
-                    price.tier,
-                    price.message,
-                    price.currency
+                    tier,
+                    message,
+                    currency
                 )
-            } else {
-                null
-            }
-            ,
+            },
             likes.count,
             VenueDetailsEntity.Rating(
                 rating,
@@ -78,32 +75,29 @@ fun VenueDetailsResponseModel.toVenueDetailsEntity(locationId: Int) =
                 ratingSignals
             ),
             if (tips.groups.isNotEmpty() && tips.groups[0].items.isNotEmpty()) {
-                VenueDetailsEntity.Tip(
-                    tips.groups[0].items[0].createdAt,
-                    tips.groups[0].items[0].text,
-                    tips.groups[0].items[0].likes.count,
-                    tips.groups[0].items[0].agreeCount,
-                    tips.groups[0].items[0].disagreeCount,
-                    tips.groups[0].items[0].user.id,
-                    tips.groups[0].items[0].user.firstName,
-                    tips.groups[0].items[0].user.lastName,
-                    tips.groups[0].items[0].user.photoUrl()
-                )
-            } else {
-                null
-            }
-            ,
+                tips.groups[0].items[0].run {
+                    VenueDetailsEntity.Tip(
+                        createdAt,
+                        text,
+                        likes.count,
+                        agreeCount,
+                        disagreeCount,
+                        user.id,
+                        user.firstName,
+                        user.lastName,
+                        user.photoUrl()
+                    )
+                }
+            } else null,
             popular?.isOpen,
-            if (bestPhoto != null) {
+            bestPhoto?.run {
                 VenueDetailsEntity.Photo(
-                    bestPhoto.id,
-                    bestPhoto.createdAt,
-                    bestPhoto.width,
-                    bestPhoto.height,
-                    bestPhoto.url()
+                    id,
+                    createdAt,
+                    width,
+                    height,
+                    url()
                 )
-            } else {
-                null
             }
         )
     }
@@ -128,58 +122,48 @@ fun VenueDetailsEntity.toVenueDetailsDataHolder() =
         ),
         verified,
         url,
-        if (price != null) {
+        price?.run {
             VenueDetailsDataHolder.Price(
-                price.tier,
-                price.message,
-                price.currency
+                tier,
+                message,
+                currency
             )
-        } else {
-            null
-        }
-        ,
-        likeCount,
-        if (rating != null) {
-            VenueDetailsDataHolder.Rating(
-                rating.rating,
-                rating.ratingColor,
-                rating.ratingSignals
-            )
-        } else {
-            null
         },
-        if (lastTip != null) {
+        likeCount,
+        rating?.run {
+            VenueDetailsDataHolder.Rating(
+                rating,
+                ratingColor,
+                ratingSignals
+            )
+        },
+        lastTip?.run {
             VenueDetailsDataHolder.Tip(
                 SimpleDateFormat(
                     "MMMM d, yyyy",
                     Locale.ENGLISH
-                ).format(Date(lastTip.createdAt.toLong() * 1000)),
-                lastTip.text,
-                lastTip.likeCount,
-                lastTip.agreeCount,
-                lastTip.disagreeCount,
-                lastTip.userId,
-                lastTip.userFirstName,
-                lastTip.userLastName,
-                lastTip.userPhoto
+                ).format(Date(createdAt.toLong() * 1000)),
+                text,
+                likeCount,
+                agreeCount,
+                disagreeCount,
+                userId,
+                userFirstName,
+                userLastName,
+                userPhoto
             )
-        } else {
-            null
-        }
-        ,
+        },
         isOpen,
-        if (bestPhoto != null) {
+        bestPhoto?.run {
             VenueDetailsDataHolder.Photo(
-                bestPhoto.id,
+                id,
                 SimpleDateFormat(
                     "MMMM d, yyyy",
                     Locale.ENGLISH
-                ).format(Date(bestPhoto.createdAt.toLong() * 1000)),
-                bestPhoto.width,
-                bestPhoto.height,
-                bestPhoto.url
+                ).format(Date(createdAt.toLong() * 1000)),
+                width,
+                height,
+                url
             )
-        } else {
-            null
         }
     )
