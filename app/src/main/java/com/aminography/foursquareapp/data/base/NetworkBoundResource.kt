@@ -44,18 +44,10 @@ abstract class NetworkBoundResource<QueryType, ResponseType, ResultType>(private
 
         isLoadMore = loadMore
         if (loadMore) {
-            setValue(
-                Resource.loading(
-                    lastData
-                )
-            )
+            setValue(Resource.loading(lastData))
         } else {
             stopRunning()
-            setValue(
-                Resource.loading(
-                    null
-                )
-            )
+            setValue(Resource.loading(null))
         }
         runningJob = coroutineScope.launch(Dispatchers.IO + exceptionHandler) {
             isInLoading.set(true)
@@ -63,11 +55,7 @@ abstract class NetworkBoundResource<QueryType, ResponseType, ResultType>(private
             if (shouldFetch(query, dbResult)) {
                 fetchFromNetwork(query, dbResult)
             } else {
-                setValue(
-                    Resource.success(
-                        dbResult
-                    )
-                )
+                setValue(Resource.success(dbResult))
                 isInLoading.set(false)
             }
         }
@@ -88,38 +76,21 @@ abstract class NetworkBoundResource<QueryType, ResponseType, ResultType>(private
     }
 
     private suspend fun fetchFromNetwork(query: QueryType, dbResult: ResultType?) {
-        setValue(
-            Resource.loading(
-                dbResult
-            )
-        )
+        setValue(Resource.loading(dbResult))
         createCall(query).run {
             when (status) {
                 Status.SUCCESS -> {
                     saveCallResult(query, processResponse(query, this))
-                    setValue(
-                        Resource.success(
-                            loadFromDb(query)
-                        )
-                    )
+                    setValue(Resource.success(loadFromDb(query)))
                     isInLoading.set(false)
                 }
                 Status.EMPTY -> {
-                    setValue(
-                        Resource.success(
-                            loadFromDb(query)
-                        )
-                    )
+                    setValue(Resource.success(loadFromDb(query)))
                     isInLoading.set(false)
                 }
                 Status.ERROR -> {
                     onFetchFailed(query)
-                    setValue(
-                        Resource.error(
-                            error,
-                            dbResult
-                        )
-                    )
+                    setValue(Resource.error(error, dbResult))
                     isInLoading.set(false)
                 }
                 Status.LOADING -> {
