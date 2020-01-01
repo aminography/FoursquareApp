@@ -13,6 +13,7 @@ import com.aminography.foursquareapp.R
 import com.aminography.foursquareapp.data.base.Status
 import com.aminography.foursquareapp.presentation.viewmodel.VenueDetailsViewModel
 import com.aminography.foursquareapp.core.tools.splitVenueName
+import com.aminography.foursquareapp.domain.data.VenueDetailsData
 import com.aminography.foursquareapp.presentation.ui.base.BaseBottomSheetDialogFragment
 import com.aminography.foursquareapp.presentation.ui.launch
 import com.aminography.foursquareapp.presentation.ui.loadImage
@@ -96,7 +97,7 @@ class VenueDetailsBottomSheet : BaseBottomSheetDialogFragment(R.layout.fragment_
         }
     }
 
-    private fun bindData(data: VenueDetailsDataHolder) {
+    private fun bindData(data: VenueDetailsData) {
         with(rootView) {
             val venueName = splitVenueName(data.name).first
             nameTextView.text = venueName

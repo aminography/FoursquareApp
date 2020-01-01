@@ -1,11 +1,11 @@
-package com.aminography.foursquareapp.presentation.ui.details
+package com.aminography.foursquareapp.domain.data
 
 /**
  * A data holder class which contains the fields that we need to show venue details in UI.
  *
  * @author aminography
  */
-data class VenueDetailsDataHolder(
+data class VenueDetailsData(
     val id: String,
     val name: String,
     val contact: Contact?,

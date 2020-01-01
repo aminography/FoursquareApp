@@ -1,9 +1,14 @@
 package com.aminography.foursquareapp.presentation.viewmodel
 
 import androidx.lifecycle.*
+import com.aminography.foursquareapp.data.base.mapData
 import com.aminography.foursquareapp.domain.LoadVenueRecommendations
+import com.aminography.foursquareapp.presentation.ui.recommendations.dataholder.VenueItemDataHolder
 import com.aminography.foursquareapp.presentation.viewmodel.base.AbsentLiveData
 import com.google.android.gms.maps.model.LatLng
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 
 /**
  * A [ViewModel] subclass which provides data from the repository to the view for the venue recommendations.
@@ -23,9 +28,19 @@ class VenueRecommendationsViewModel(
     /**
      * The [LiveData] instance that exposes data by observing it
      */
+    @Suppress("EXPERIMENTAL_API_USAGE")
     val venueRecommendations = queryLiveData.switchMap { query ->
         query?.run {
-            useCase.execute(viewModelScope, query).asLiveData()
+            useCase.execute(viewModelScope, query)
+                .map { resource ->
+                    resource.mapData { list ->
+                        list?.map { entity ->
+                            VenueItemDataHolder(entity)
+                        }
+                    }
+                }
+                .flowOn(Dispatchers.Default)
+                .asLiveData()
         } ?: AbsentLiveData.create()
     }
 

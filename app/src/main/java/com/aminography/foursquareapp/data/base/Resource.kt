@@ -52,6 +52,6 @@ data class Resource<T>(
  * @param transform the transformation operation
  * @return a new instance of [Resource] with the transformed data preserving the [Status]
  */
-inline fun <T, R> Resource<T>.map(transform: (T?) -> R?): Resource<R> {
+inline fun <T, R> Resource<T>.mapData(transform: (T?) -> R?): Resource<R> {
     return Resource(status, transform(this.data), error)
 }

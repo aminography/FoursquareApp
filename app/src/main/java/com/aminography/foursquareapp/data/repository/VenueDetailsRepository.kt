@@ -2,15 +2,15 @@ package com.aminography.foursquareapp.data.repository
 
 import com.aminography.foursquareapp.data.base.NetworkBoundResource
 import com.aminography.foursquareapp.data.base.Resource
-import com.aminography.foursquareapp.data.base.map
+import com.aminography.foursquareapp.data.base.mapData
 import com.aminography.foursquareapp.data.datasource.local.LocalDataSource
 import com.aminography.foursquareapp.data.datasource.local.db.details.VenueDetailsEntity
 import com.aminography.foursquareapp.data.datasource.remote.RemoteDataSource
 import com.aminography.foursquareapp.data.datasource.remote.webservice.response.venue.VenueDetailsResponseModel
 import com.aminography.foursquareapp.domain.repository.IVenueDetailsRepository
-import com.aminography.foursquareapp.domain.toVenueDetailsDataHolder
+import com.aminography.foursquareapp.domain.toVenueDetailsData
 import com.aminography.foursquareapp.domain.toVenueDetailsEntity
-import com.aminography.foursquareapp.presentation.ui.details.VenueDetailsDataHolder
+import com.aminography.foursquareapp.domain.data.VenueDetailsData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -68,8 +68,8 @@ class VenueDetailsRepository internal constructor(
     private val flow by lazy {
         resource.asFlow()
             .map { resource ->
-                resource.map { entity ->
-                    entity?.toVenueDetailsDataHolder()
+                resource.mapData { entity ->
+                    entity?.toVenueDetailsData()
                 }
             }
             .flowOn(Dispatchers.Default)
@@ -85,7 +85,7 @@ class VenueDetailsRepository internal constructor(
     override fun loadVenueDetails(
         coroutineScope: CoroutineScope,
         venueId: String
-    ): Flow<Resource<VenueDetailsDataHolder>> {
+    ): Flow<Resource<VenueDetailsData>> {
         this.coroutineScope = coroutineScope
         return flow.also {
             resource.invalidate(venueId)

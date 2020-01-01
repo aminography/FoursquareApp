@@ -4,17 +4,17 @@ import com.aminography.foursquareapp.core.logic.decision.FetchDecisionMaker
 import com.aminography.foursquareapp.core.logic.network.NetworkChecker
 import com.aminography.foursquareapp.data.base.NetworkBoundResource
 import com.aminography.foursquareapp.data.base.Resource
-import com.aminography.foursquareapp.data.base.map
+import com.aminography.foursquareapp.data.base.mapData
 import com.aminography.foursquareapp.data.datasource.local.LocalDataSource
 import com.aminography.foursquareapp.data.datasource.local.db.location.LocationEntity
 import com.aminography.foursquareapp.data.datasource.local.db.venue.VenueEntity
 import com.aminography.foursquareapp.data.datasource.remote.RemoteDataSource
 import com.aminography.foursquareapp.data.datasource.remote.webservice.response.venue.VenueRecommendationsResponseModel
+import com.aminography.foursquareapp.domain.data.VenueItemData
 import com.aminography.foursquareapp.domain.repository.IVenueRecommendationsRepository
 import com.aminography.foursquareapp.domain.toVenueEntity
-import com.aminography.foursquareapp.domain.toVenueItemDataHolder
+import com.aminography.foursquareapp.domain.toVenueItemData
 import com.aminography.foursquareapp.presentation.ui.concat
-import com.aminography.foursquareapp.presentation.ui.recommendations.dataholder.VenueItemDataHolder
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -142,9 +142,9 @@ class VenueRecommendationsRepository internal constructor(
     private val flow by lazy {
         resource.asFlow()
             .map { resource ->
-                resource.map { entityList ->
-                    entityList?.map { entity ->
-                        entity.toVenueItemDataHolder()
+                resource.mapData { list ->
+                    list?.map { entity ->
+                        entity.toVenueItemData()
                     }
                 }
             }
@@ -168,7 +168,7 @@ class VenueRecommendationsRepository internal constructor(
     override fun loadVenueRecommendations(
         coroutineScope: CoroutineScope,
         location: LatLng
-    ): Flow<Resource<List<VenueItemDataHolder>>> {
+    ): Flow<Resource<List<VenueItemData>>> {
         this.coroutineScope = coroutineScope
         return flow.also {
             query = location

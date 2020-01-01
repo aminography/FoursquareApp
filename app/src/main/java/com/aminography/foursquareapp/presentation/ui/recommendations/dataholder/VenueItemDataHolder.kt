@@ -1,5 +1,6 @@
 package com.aminography.foursquareapp.presentation.ui.recommendations.dataholder
 
+import com.aminography.foursquareapp.domain.data.VenueItemData
 import com.aminography.foursquareapp.presentation.ui.base.BaseAdapter
 
 /**
@@ -8,10 +9,5 @@ import com.aminography.foursquareapp.presentation.ui.base.BaseAdapter
  * @author aminography
  */
 data class VenueItemDataHolder(
-    val venueId: String,
-    val name: String,
-    val address: String?,
-    val distance: String,
-    val categoryIcon: String,
-    val verified: Boolean
+    val data: VenueItemData
 ) : BaseAdapter.BaseDataHolder()
