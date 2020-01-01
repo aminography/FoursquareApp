@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import com.aminography.foursquareapp.R
 import com.aminography.foursquareapp.core.tools.splitVenueName
-import com.aminography.foursquareapp.domain.data.VenueItemData
+import com.aminography.foursquareapp.domain.model.VenueItemModel
 import com.aminography.foursquareapp.presentation.ui.base.BaseAdapter
 import com.aminography.foursquareapp.presentation.ui.loadImage
 import kotlinx.android.synthetic.main.list_item_venue.view.*
@@ -22,7 +22,7 @@ class VenueItemViewHolder(context: Context) :
     ) {
 
     override fun <DH> bindDataToView(dataHolder: DH) {
-        if (dataHolder is VenueItemData) {
+        if (dataHolder is VenueItemModel) {
             with(itemView) {
                 val name = splitVenueName(dataHolder.name).first
                 nameTextView.text = name

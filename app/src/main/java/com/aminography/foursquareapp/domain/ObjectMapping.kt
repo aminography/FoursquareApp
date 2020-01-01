@@ -5,8 +5,8 @@ import com.aminography.foursquareapp.data.datasource.local.db.details.VenueDetai
 import com.aminography.foursquareapp.data.datasource.local.db.venue.VenueEntity
 import com.aminography.foursquareapp.data.datasource.remote.webservice.response.venue.VenueDetailsResponseModel
 import com.aminography.foursquareapp.data.datasource.remote.webservice.response.venue.VenueRecommendationsResponseModel
-import com.aminography.foursquareapp.domain.data.VenueDetailsData
-import com.aminography.foursquareapp.domain.data.VenueItemData
+import com.aminography.foursquareapp.domain.model.VenueDetailsModel
+import com.aminography.foursquareapp.domain.model.VenueItemModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,8 +28,8 @@ fun VenueRecommendationsResponseModel.Item.toVenueEntity(locationId: Int) =
         venue.verified
     )
 
-fun VenueEntity.toVenueItemData() =
-    VenueItemData(
+fun VenueEntity.toVenueItemModel() =
+    VenueItemModel(
         venueId,
         name,
         address,
@@ -102,28 +102,28 @@ fun VenueDetailsResponseModel.toVenueDetailsEntity(locationId: Int) =
         )
     }
 
-fun VenueDetailsEntity.toVenueDetailsData() =
-    VenueDetailsData(
+fun VenueDetailsEntity.toVenueDetailsModel() =
+    VenueDetailsModel(
         venueId,
         name,
-        VenueDetailsData.Contact(
+        VenueDetailsModel.Contact(
             contact?.phone,
             contact?.formattedPhone,
             contact?.instagram
         ),
-        VenueDetailsData.Location(
+        VenueDetailsModel.Location(
             location.address,
             location.latitude,
             location.longitude
         ),
-        VenueDetailsData.Category(
+        VenueDetailsModel.Category(
             category.name,
             category.icon
         ),
         verified,
         url,
         price?.run {
-            VenueDetailsData.Price(
+            VenueDetailsModel.Price(
                 tier,
                 message,
                 currency
@@ -131,14 +131,14 @@ fun VenueDetailsEntity.toVenueDetailsData() =
         },
         likeCount,
         rating?.run {
-            VenueDetailsData.Rating(
+            VenueDetailsModel.Rating(
                 rating,
                 ratingColor,
                 ratingSignals
             )
         },
         lastTip?.run {
-            VenueDetailsData.Tip(
+            VenueDetailsModel.Tip(
                 SimpleDateFormat(
                     "MMMM d, yyyy",
                     Locale.ENGLISH
@@ -155,7 +155,7 @@ fun VenueDetailsEntity.toVenueDetailsData() =
         },
         isOpen,
         bestPhoto?.run {
-            VenueDetailsData.Photo(
+            VenueDetailsModel.Photo(
                 id,
                 SimpleDateFormat(
                     "MMMM d, yyyy",

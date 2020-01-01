@@ -13,7 +13,7 @@ import com.aminography.foursquareapp.R
 import com.aminography.foursquareapp.data.base.Status
 import com.aminography.foursquareapp.presentation.viewmodel.VenueDetailsViewModel
 import com.aminography.foursquareapp.core.tools.splitVenueName
-import com.aminography.foursquareapp.domain.data.VenueDetailsData
+import com.aminography.foursquareapp.domain.model.VenueDetailsModel
 import com.aminography.foursquareapp.presentation.ui.base.BaseBottomSheetDialogFragment
 import com.aminography.foursquareapp.presentation.ui.launch
 import com.aminography.foursquareapp.presentation.ui.loadImage
@@ -97,14 +97,14 @@ class VenueDetailsBottomSheet : BaseBottomSheetDialogFragment(R.layout.fragment_
         }
     }
 
-    private fun bindData(data: VenueDetailsData) {
+    private fun bindData(model: VenueDetailsModel) {
         with(rootView) {
-            val venueName = splitVenueName(data.name).first
+            val venueName = splitVenueName(model.name).first
             nameTextView.text = venueName
-            categoryNameTextView.text = data.category.name
-            verifiedImageView.visibility = if (data.verified) View.VISIBLE else View.GONE
+            categoryNameTextView.text = model.category.name
+            verifiedImageView.visibility = if (model.verified) View.VISIBLE else View.GONE
 
-            data.price?.apply {
+            model.price?.apply {
                 val source = String.format(
                     Locale.getDefault(),
                     "%s (%s)",
@@ -121,9 +121,9 @@ class VenueDetailsBottomSheet : BaseBottomSheetDialogFragment(R.layout.fragment_
                 spannableString.setSpan(span, 0, tier, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
                 priceTextView.text = spannableString
             }
-            priceGroup.visibility = if (data.price == null) View.GONE else View.VISIBLE
+            priceGroup.visibility = if (model.price == null) View.GONE else View.VISIBLE
 
-            data.rating?.apply {
+            model.rating?.apply {
                 ratingBar.rating = rating.toFloat() / 2
                 ratingBar.setRatingBarColors()
                 rateCountTextView.text = String.format(
@@ -132,9 +132,9 @@ class VenueDetailsBottomSheet : BaseBottomSheetDialogFragment(R.layout.fragment_
                     ratingSignals
                 )
             }
-            ratingGroup.visibility = if (data.rating == null) View.GONE else View.VISIBLE
+            ratingGroup.visibility = if (model.rating == null) View.GONE else View.VISIBLE
 
-            data.contact?.apply {
+            model.contact?.apply {
                 if (formattedPhone != null) {
                     phoneTextView.text = formattedPhone
                 } else {
@@ -147,8 +147,8 @@ class VenueDetailsBottomSheet : BaseBottomSheetDialogFragment(R.layout.fragment_
                     instagramTextView.visibility = View.GONE
                     instagramIconImageView.visibility = View.GONE
                 }
-                if (data.url != null) {
-                    webTextView.text = data.url
+                if (model.url != null) {
+                    webTextView.text = model.url
                 } else {
                     webTextView.visibility = View.GONE
                     webIconImageView.visibility = View.GONE
@@ -161,7 +161,7 @@ class VenueDetailsBottomSheet : BaseBottomSheetDialogFragment(R.layout.fragment_
                 contactLabelTextView.visibility = View.GONE
             }
 
-            data.location.apply {
+            model.location.apply {
                 addressTextView.text = address
                 addressTextView.visibility = if (address == null) View.GONE else View.VISIBLE
 
@@ -174,14 +174,14 @@ class VenueDetailsBottomSheet : BaseBottomSheetDialogFragment(R.layout.fragment_
                 }
             }
 
-            data.bestPhoto?.apply {
+            model.bestPhoto?.apply {
                 bestPhotoImageView.loadImage(url, placeholderResId = R.drawable.default_placeholder)
                 bestPhotoUserTextView.text =
                     String.format(Locale.getDefault(), "Taken at %s", createdAt)
             }
-            bestPhotoGroup.visibility = if (data.bestPhoto == null) View.GONE else View.VISIBLE
+            bestPhotoGroup.visibility = if (model.bestPhoto == null) View.GONE else View.VISIBLE
 
-            data.lastTip?.apply {
+            model.lastTip?.apply {
                 tipUserNameTextView.text =
                     if (userLastName != null) "$userFirstName $userLastName"
                     else userFirstName
@@ -195,7 +195,7 @@ class VenueDetailsBottomSheet : BaseBottomSheetDialogFragment(R.layout.fragment_
                 )
                 lastTipTextView.text = text
             }
-            lastTipGroup.visibility = if (data.lastTip == null) View.GONE else View.VISIBLE
+            lastTipGroup.visibility = if (model.lastTip == null) View.GONE else View.VISIBLE
         }
     }
 

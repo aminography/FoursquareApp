@@ -12,7 +12,7 @@ import com.aminography.foursquareapp.R
 import com.aminography.foursquareapp.core.logic.location.LocationProvider
 import com.aminography.foursquareapp.core.logic.location.LocationResponse
 import com.aminography.foursquareapp.data.base.Status
-import com.aminography.foursquareapp.domain.data.VenueItemData
+import com.aminography.foursquareapp.domain.model.VenueItemModel
 import com.aminography.foursquareapp.presentation.ui.animateCompat
 import com.aminography.foursquareapp.presentation.ui.base.BaseFragment
 import com.aminography.foursquareapp.presentation.ui.base.OnListItemClickListener
@@ -209,7 +209,7 @@ class VenueRecommendationsFragment : BaseFragment(R.layout.fragment_venue_recomm
     }
 
     override fun <DH> onItemClicked(dataHolder: DH) {
-        if (dataHolder is VenueItemData) {
+        if (dataHolder is VenueItemModel) {
             VenueDetailsBottomSheet.newInstance(dataHolder.venueId).show(parentFragmentManager)
         }
     }

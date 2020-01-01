@@ -8,9 +8,9 @@ import com.aminography.foursquareapp.data.datasource.local.db.details.VenueDetai
 import com.aminography.foursquareapp.data.datasource.remote.RemoteDataSource
 import com.aminography.foursquareapp.data.datasource.remote.webservice.response.venue.VenueDetailsResponseModel
 import com.aminography.foursquareapp.domain.repository.IVenueDetailsRepository
-import com.aminography.foursquareapp.domain.toVenueDetailsData
+import com.aminography.foursquareapp.domain.toVenueDetailsModel
 import com.aminography.foursquareapp.domain.toVenueDetailsEntity
-import com.aminography.foursquareapp.domain.data.VenueDetailsData
+import com.aminography.foursquareapp.domain.model.VenueDetailsModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -69,7 +69,7 @@ class VenueDetailsRepository internal constructor(
         resource.asFlow()
             .map { resource ->
                 resource.mapData { entity ->
-                    entity?.toVenueDetailsData()
+                    entity?.toVenueDetailsModel()
                 }
             }
             .flowOn(Dispatchers.Default)
@@ -85,7 +85,7 @@ class VenueDetailsRepository internal constructor(
     override fun loadVenueDetails(
         coroutineScope: CoroutineScope,
         venueId: String
-    ): Flow<Resource<VenueDetailsData>> {
+    ): Flow<Resource<VenueDetailsModel>> {
         this.coroutineScope = coroutineScope
         return flow.also {
             resource.invalidate(venueId)

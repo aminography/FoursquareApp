@@ -10,10 +10,10 @@ import com.aminography.foursquareapp.data.datasource.local.db.location.LocationE
 import com.aminography.foursquareapp.data.datasource.local.db.venue.VenueEntity
 import com.aminography.foursquareapp.data.datasource.remote.RemoteDataSource
 import com.aminography.foursquareapp.data.datasource.remote.webservice.response.venue.VenueRecommendationsResponseModel
-import com.aminography.foursquareapp.domain.data.VenueItemData
+import com.aminography.foursquareapp.domain.model.VenueItemModel
 import com.aminography.foursquareapp.domain.repository.IVenueRecommendationsRepository
 import com.aminography.foursquareapp.domain.toVenueEntity
-import com.aminography.foursquareapp.domain.toVenueItemData
+import com.aminography.foursquareapp.domain.toVenueItemModel
 import com.aminography.foursquareapp.presentation.ui.concat
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.CoroutineScope
@@ -144,7 +144,7 @@ class VenueRecommendationsRepository internal constructor(
             .map { resource ->
                 resource.mapData { list ->
                     list?.map { entity ->
-                        entity.toVenueItemData()
+                        entity.toVenueItemModel()
                     }
                 }
             }
@@ -168,7 +168,7 @@ class VenueRecommendationsRepository internal constructor(
     override fun loadVenueRecommendations(
         coroutineScope: CoroutineScope,
         location: LatLng
-    ): Flow<Resource<List<VenueItemData>>> {
+    ): Flow<Resource<List<VenueItemModel>>> {
         this.coroutineScope = coroutineScope
         return flow.also {
             query = location

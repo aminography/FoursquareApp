@@ -2,7 +2,7 @@ package com.aminography.foursquareapp.presentation.ui.recommendations.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import com.aminography.foursquareapp.domain.data.VenueItemData
+import com.aminography.foursquareapp.domain.model.VenueItemModel
 import com.aminography.foursquareapp.presentation.ui.base.BaseAdapter
 import com.aminography.foursquareapp.presentation.ui.recommendations.viewholder.VenueItemViewHolder
 
@@ -11,20 +11,20 @@ import com.aminography.foursquareapp.presentation.ui.recommendations.viewholder.
  *
  * @author aminography
  */
-class VenueListAdapter : BaseAdapter<VenueItemData, VenueItemViewHolder>() {
+class VenueListAdapter : BaseAdapter<VenueItemModel, VenueItemViewHolder>() {
 
     init {
-        diffUtilCallback = object : DiffUtil.ItemCallback<VenueItemData>() {
+        diffUtilCallback = object : DiffUtil.ItemCallback<VenueItemModel>() {
             override fun areItemsTheSame(
-                new: VenueItemData,
-                old: VenueItemData
+                new: VenueItemModel,
+                old: VenueItemModel
             ): Boolean {
                 return new.venueId == old.venueId
             }
 
             override fun areContentsTheSame(
-                new: VenueItemData,
-                old: VenueItemData
+                new: VenueItemModel,
+                old: VenueItemModel
             ): Boolean {
                 return new == old
             }
