@@ -26,11 +26,10 @@ import java.util.concurrent.TimeUnit
  * @param endPointUrl the url of webservice endpoint
  * @return an instance of [IWebService]
  */
-fun createService(endPointUrl: String): IWebService =
+fun createWebService(endPointUrl: String): IWebService =
     createAdapter(
         endPointUrl
-    )
-        .create(IWebService::class.java)
+    ).create(IWebService::class.java)
 
 private fun createAdapter(baseUrl: String): Retrofit =
     Retrofit.Builder()

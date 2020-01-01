@@ -1,19 +1,19 @@
 package com.aminography.foursquareapp.core.logic.dependency
 
+import com.aminography.foursquareapp.core.logic.decision.FetchDecisionMaker
+import com.aminography.foursquareapp.core.logic.location.LocationProvider
+import com.aminography.foursquareapp.core.logic.network.NetworkChecker
 import com.aminography.foursquareapp.data.datasource.local.LocalDataSource
 import com.aminography.foursquareapp.data.datasource.local.db.AppDatabase
 import com.aminography.foursquareapp.data.datasource.remote.RemoteDataSource
 import com.aminography.foursquareapp.data.datasource.remote.webservice.base.WEB_SERVICE_END_POINT
-import com.aminography.foursquareapp.data.datasource.remote.webservice.base.createService
+import com.aminography.foursquareapp.data.datasource.remote.webservice.base.createWebService
 import com.aminography.foursquareapp.data.repository.VenueDetailsRepository
 import com.aminography.foursquareapp.data.repository.VenueRecommendationsRepository
 import com.aminography.foursquareapp.domain.LoadVenueDetails
 import com.aminography.foursquareapp.domain.LoadVenueRecommendations
 import com.aminography.foursquareapp.domain.repository.IVenueDetailsRepository
 import com.aminography.foursquareapp.domain.repository.IVenueRecommendationsRepository
-import com.aminography.foursquareapp.core.logic.decision.FetchDecisionMaker
-import com.aminography.foursquareapp.core.logic.location.LocationProvider
-import com.aminography.foursquareapp.core.logic.network.NetworkChecker
 import com.aminography.foursquareapp.presentation.viewmodel.VenueDetailsViewModel
 import com.aminography.foursquareapp.presentation.viewmodel.VenueRecommendationsViewModel
 import com.google.android.gms.location.LocationServices
@@ -32,9 +32,7 @@ val networkModule = module {
     }
 
     single {
-        createService(
-            WEB_SERVICE_END_POINT
-        )
+        createWebService(WEB_SERVICE_END_POINT)
     }
 }
 
