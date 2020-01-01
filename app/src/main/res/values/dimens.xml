@@ -1,0 +1,11 @@
+<resources>
+    <dimen name="text_size_huge">24sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_normal">15sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+
+    <dimen name="venue_item_title_text_size">16sp</dimen>
+    <dimen name="venue_item_distance_text_size">12sp</dimen>
+    <dimen name="venue_item_address_text_size">12sp</dimen>
+
+</resources>

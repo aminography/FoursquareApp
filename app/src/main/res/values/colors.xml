@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#202125</color>
+    <color name="colorPrimaryDark">#202125</color>
+    <color name="colorAccent">#00A273</color>
+
+    <color name="cardBackground">#2A2B2F</color>
+    <color name="placeholderBackground">#383A42</color>
+
+    <color name="textColorPrimary">#E9EAEE</color>
+    <color name="textColorSecondary">#9BA0A6</color>
+
+    <color name="rippleColorHighlight">#7F6E7080</color>
+    <color name="pressColorHighlight">#1F50515E</color>
+    <color name="focusColorHighlight">#1F6E7080</color>
+
+    <color name="ratingBarFillColor">@color/colorAccent</color>
+    <color name="ratingBarEmptyColor">@color/textColorSecondary</color>
+
+</resources>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">FoursquareApp</string>
+    <string name="no_results_found">No results found!</string>
+    <string name="no_internet_access">No Internet Access!\nPlease check the connection then try again.</string>
+    <string name="contact_info">Contact Info</string>
+    <string name="location">Location</string>
+    <string name="best_photo">Best Photo</string>
+    <string name="best_tip">Best Tip</string>
+    <string name="loading_more_items">Loading More Items …</string>
+    <string name="retry">Retry</string>
+    <string name="location_permission">Location Permission</string>
+    <string name="location_permission_descriptions">FoursquareApp needs location permission to explore venues around you.</string>
+    <string name="close_app">Close App</string>
+    <string name="ok">OK</string>
+</resources>

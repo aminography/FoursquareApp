@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "419110657547",
+    "firebase_url": "https://foursquareapp-64519.firebaseio.com",
+    "project_id": "foursquareapp-64519",
+    "storage_bucket": "foursquareapp-64519.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:419110657547:android:d5684c57143cc3351eb10e",
+        "android_client_info": {
+          "package_name": "com.aminography.foursquareapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "419110657547-u8fobbumrni4l934vi4cddrh4tp39c1h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTRUJvNjr5AYTHBdbj7DjgC5zwsTbmAlA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "419110657547-u8fobbumrni4l934vi4cddrh4tp39c1h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
