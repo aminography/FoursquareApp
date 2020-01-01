@@ -25,12 +25,11 @@ class VenueRecommendationsViewModel(
     /**
      * The [LiveData] instance that exposes data by observing it
      */
-    val venueRecommendations: LiveData<Resource<List<VenueItemDataHolder>>> =
-        queryLiveData.switchMap { query ->
-            query?.run {
-                useCase.execute(viewModelScope, query).asLiveData()
-            } ?: AbsentLiveData.create()
-        }
+    val venueRecommendations = queryLiveData.switchMap { query ->
+        query?.run {
+            useCase.execute(viewModelScope, query).asLiveData()
+        } ?: AbsentLiveData.create()
+    }
 
     /**
      * Tries to search for the venues around the input location

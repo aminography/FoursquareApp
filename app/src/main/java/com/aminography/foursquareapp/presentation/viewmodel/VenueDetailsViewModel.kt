@@ -1,9 +1,7 @@
 package com.aminography.foursquareapp.presentation.viewmodel
 
 import androidx.lifecycle.*
-import com.aminography.foursquareapp.data.base.Resource
 import com.aminography.foursquareapp.domain.LoadVenueDetails
-import com.aminography.foursquareapp.presentation.ui.details.VenueDetailsDataHolder
 import com.aminography.foursquareapp.presentation.viewmodel.base.AbsentLiveData
 
 /**
@@ -24,12 +22,11 @@ class VenueDetailsViewModel(
     /**
      * The [LiveData] instance that exposes data by observing it
      */
-    val venueDetails: LiveData<Resource<VenueDetailsDataHolder>> =
-        queryLiveData.switchMap { query ->
-            query?.run {
-                useCase.execute(viewModelScope, query).asLiveData()
-            } ?: AbsentLiveData.create()
-        }
+    val venueDetails = queryLiveData.switchMap { query ->
+        query?.run {
+            useCase.execute(viewModelScope, query).asLiveData()
+        } ?: AbsentLiveData.create()
+    }
 
     /**
      * Tries to search for the details of the venue corresponding to the venueId
