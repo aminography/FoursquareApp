@@ -26,11 +26,9 @@ class VenueDetailsViewModel(
      */
     val venueDetails: LiveData<Resource<VenueDetailsDataHolder>> =
         queryLiveData.switchMap { query ->
-            if (query == null) {
-                AbsentLiveData.create()
-            } else {
+            query?.run {
                 useCase.execute(viewModelScope, query).asLiveData()
-            }
+            } ?: AbsentLiveData.create()
         }
 
     /**

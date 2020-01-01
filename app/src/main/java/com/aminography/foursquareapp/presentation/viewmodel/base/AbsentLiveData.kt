@@ -8,7 +8,9 @@ import com.aminography.foursquareapp.data.base.Resource
  *
  * @author aminography
  */
-class AbsentLiveData<T : Any?> private constructor(resource: Resource<T>) : LiveData<Resource<T>>() {
+class AbsentLiveData<T : Any?> private constructor(
+    resource: Resource<T>
+) : LiveData<Resource<T>>() {
 
     init {
         // use post instead of set since this can be created on any thread
@@ -18,9 +20,7 @@ class AbsentLiveData<T : Any?> private constructor(resource: Resource<T>) : Live
     companion object {
 
         fun <T> create(): LiveData<Resource<T>> {
-            return AbsentLiveData(
-                Resource.empty()
-            )
+            return AbsentLiveData(Resource.empty())
         }
     }
 }

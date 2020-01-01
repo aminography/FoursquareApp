@@ -25,13 +25,11 @@ class VenueRecommendationsViewModel(
     /**
      * The [LiveData] instance that exposes data by observing it
      */
-    val venues: LiveData<Resource<List<VenueItemDataHolder>>> =
-        queryLiveData.switchMap { location ->
-            if (location == null) {
-                AbsentLiveData.create()
-            } else {
-                useCase.execute(viewModelScope, location).asLiveData()
-            }
+    val venueRecommendations: LiveData<Resource<List<VenueItemDataHolder>>> =
+        queryLiveData.switchMap { query ->
+            query?.run {
+                useCase.execute(viewModelScope, query).asLiveData()
+            } ?: AbsentLiveData.create()
         }
 
     /**

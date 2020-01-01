@@ -55,7 +55,7 @@ class VenueRecommendationsFragment : BaseFragment(R.layout.fragment_venue_recomm
         recyclerView.adapter = adapter
         recyclerView.addOnScrollListener(OnScrollListener())
 
-        viewModel.venues.observe(this, Observer {
+        viewModel.venueRecommendations.observe(this, Observer {
             val list = it.data ?: arrayListOf()
             handleUiStates(it.status, it.error, list.isEmpty())
             when (it.status) {
