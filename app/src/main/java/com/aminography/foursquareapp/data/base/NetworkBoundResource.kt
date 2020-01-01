@@ -24,7 +24,7 @@ abstract class NetworkBoundResource<QueryType, ResponseType, ResultType>(private
 
     private val channel by lazy {
         coroutineScope.broadcast<Resource<ResultType>> {
-            // keep the channel opened until the scope is not active
+            // keep the channel alive until the scope is not active
             while (isActive) delay(100)
             channel.close()
         }
