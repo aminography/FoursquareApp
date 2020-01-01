@@ -2,6 +2,8 @@ package com.aminography.foursquareapp.presentation.ui
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
 import android.graphics.Point
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
@@ -94,17 +96,23 @@ fun RatingBar.setRatingBarColors(
 ) {
     val stars = progressDrawable as LayerDrawable
     stars.getDrawable(2).setColorFilter(
-        ContextCompat.getColor(context, fillColor),
-        PorterDuff.Mode.SRC_ATOP
+        ContextCompat.getColor(context, fillColor)
     ) // for filled stars
     stars.getDrawable(1).setColorFilter(
-        ContextCompat.getColor(context, fillColor),
-        PorterDuff.Mode.SRC_ATOP
+        ContextCompat.getColor(context, fillColor)
     ) // for half filled stars
     stars.getDrawable(0).setColorFilter(
-        ContextCompat.getColor(context, emptyColor),
-        PorterDuff.Mode.SRC_ATOP
+        ContextCompat.getColor(context, emptyColor)
     )  // for empty stars
+}
+
+private fun Drawable.setColorFilter(color: Int) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        colorFilter = BlendModeColorFilter(color, BlendMode.SRC_ATOP)
+    } else {
+        @Suppress("DEPRECATION")
+        setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+    }
 }
 
 fun View.animateCompat(): ViewPropertyAnimatorCompat {
@@ -134,9 +142,11 @@ fun ImageView.loadImage(
     placeholderResId?.let { requestBuilder.apply(RequestOptions.placeholderOf(it)) }
     listener?.let { requestBuilder.listener(it) }
     if (listener != null) requestBuilder.listener(listener)
-    if (crossFade) requestBuilder.transition(DrawableTransitionOptions.withCrossFade(
-        factory
-    ))
+    if (crossFade) requestBuilder.transition(
+        DrawableTransitionOptions.withCrossFade(
+            factory
+        )
+    )
     if (circleCrop) requestBuilder.apply(RequestOptions.circleCropTransform())
     requestBuilder.into(this)
 }
