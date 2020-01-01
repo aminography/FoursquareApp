@@ -2,7 +2,7 @@ package com.aminography.foursquareapp.core
 
 import androidx.multidex.MultiDexApplication
 import androidx.appcompat.app.AppCompatDelegate
-import com.aminography.foursquareapp.core.logic.dependency.appComponent
+import com.aminography.foursquareapp.core.di.appComponent
 import org.koin.android.ext.android.startKoin
 
 /**

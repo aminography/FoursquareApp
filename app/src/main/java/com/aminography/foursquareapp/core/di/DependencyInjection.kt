@@ -1,4 +1,4 @@
-package com.aminography.foursquareapp.core.logic.dependency
+package com.aminography.foursquareapp.core.di
 
 import com.aminography.foursquareapp.core.logic.decision.FetchDecisionMaker
 import com.aminography.foursquareapp.core.logic.location.LocationProvider
@@ -7,7 +7,7 @@ import com.aminography.foursquareapp.data.datasource.local.LocalDataSource
 import com.aminography.foursquareapp.data.datasource.local.db.AppDatabase
 import com.aminography.foursquareapp.data.datasource.remote.RemoteDataSource
 import com.aminography.foursquareapp.data.datasource.remote.webservice.base.WEB_SERVICE_END_POINT
-import com.aminography.foursquareapp.data.datasource.remote.webservice.base.createWebService
+import com.aminography.foursquareapp.data.datasource.remote.webservice.base.WebServiceFactory
 import com.aminography.foursquareapp.data.repository.VenueDetailsRepository
 import com.aminography.foursquareapp.data.repository.VenueRecommendationsRepository
 import com.aminography.foursquareapp.domain.LoadVenueDetails
@@ -32,7 +32,7 @@ val networkModule = module {
     }
 
     single {
-        createWebService(WEB_SERVICE_END_POINT)
+        WebServiceFactory.create(WEB_SERVICE_END_POINT)
     }
 }
 

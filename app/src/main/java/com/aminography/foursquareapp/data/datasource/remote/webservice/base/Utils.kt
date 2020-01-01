@@ -19,37 +19,6 @@ import java.util.concurrent.TimeUnit
  * @author aminography
  */
 
-
-/**
- * Creates a concrete instance of [IWebService] using [Retrofit].
- *
- * @param endPointUrl the url of webservice endpoint
- * @return an instance of [IWebService]
- */
-fun createWebService(endPointUrl: String): IWebService =
-    createAdapter(
-        endPointUrl
-    ).create(IWebService::class.java)
-
-private fun createAdapter(baseUrl: String): Retrofit =
-    Retrofit.Builder()
-        .baseUrl(baseUrl)
-        .client(createHttpClient())
-        .addConverterFactory(GsonConverterFactory.create()).build()
-
-private fun createHttpClient(): OkHttpClient =
-    OkHttpClient.Builder().apply {
-        connectTimeout(TIMEOUT_CONNECT, TimeUnit.SECONDS)
-        readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
-        writeTimeout(TIMEOUT_WRITE, TimeUnit.SECONDS)
-        cookieJar(JavaNetCookieJar(CookieManager()))
-        interceptors().add(
-            HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            }
-        )
-    }.build()
-
 /**
  * Converts response of the retrofit to a Resource object.
  *
