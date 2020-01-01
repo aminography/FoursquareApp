@@ -211,7 +211,7 @@ class VenueRecommendationsFragment : BaseFragment(R.layout.fragment_venue_recomm
 
     override fun onItemClicked(dataHolder: BaseAdapter.BaseDataHolder) {
         if (dataHolder is VenueItemDataHolder) {
-            VenueDetailsBottomSheet.newInstance(dataHolder.venueId).show(parentFragmentManager)
+            VenueDetailsBottomSheet.newInstance(dataHolder.data.venueId).show(parentFragmentManager)
         }
     }
 

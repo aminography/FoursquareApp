@@ -19,7 +19,7 @@ class VenueListAdapter : BaseAdapter<VenueItemDataHolder, VenueItemViewHolder>()
                 new: VenueItemDataHolder,
                 old: VenueItemDataHolder
             ): Boolean {
-                return new.venueId == old.venueId
+                return new.data.venueId == old.data.venueId
             }
 
             override fun areContentsTheSame(
