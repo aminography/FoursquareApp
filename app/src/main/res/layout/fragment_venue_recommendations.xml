@@ -18,7 +18,8 @@
         android:paddingLeft="8dp"
         android:paddingTop="8dp"
         android:paddingRight="8dp"
-        android:paddingBottom="8dp" />
+        android:paddingBottom="8dp"
+        tools:listitem="@layout/list_item_venue" />
 
     <ProgressBar
         android:id="@+id/progressBar"
