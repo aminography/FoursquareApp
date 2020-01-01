@@ -1,4 +1,4 @@
-package com.aminography.foursquareapp.presentation.ui.venues.dataholder
+package com.aminography.foursquareapp.presentation.ui.recommendations.dataholder
 
 import com.aminography.foursquareapp.presentation.ui.base.BaseAdapter
 

@@ -1,10 +1,10 @@
-package com.aminography.foursquareapp.presentation.ui.venues.adapter
+package com.aminography.foursquareapp.presentation.ui.recommendations.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.aminography.foursquareapp.presentation.ui.base.BaseAdapter
-import com.aminography.foursquareapp.presentation.ui.venues.dataholder.VenueItemDataHolder
-import com.aminography.foursquareapp.presentation.ui.venues.viewholder.VenueItemViewHolder
+import com.aminography.foursquareapp.presentation.ui.recommendations.dataholder.VenueItemDataHolder
+import com.aminography.foursquareapp.presentation.ui.recommendations.viewholder.VenueItemViewHolder
 
 /**
  * A concrete instance of adapter for list of the venue recommendations

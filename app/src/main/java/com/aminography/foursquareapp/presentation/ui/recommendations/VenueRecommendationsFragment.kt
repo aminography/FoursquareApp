@@ -1,4 +1,4 @@
-package com.aminography.foursquareapp.presentation.ui.venues
+package com.aminography.foursquareapp.presentation.ui.recommendations
 
 import android.Manifest
 import android.os.Bundle
@@ -20,8 +20,8 @@ import com.aminography.foursquareapp.presentation.ui.details.VenueDetailsBottomS
 import com.aminography.foursquareapp.presentation.ui.animateCompat
 import com.aminography.foursquareapp.presentation.ui.hasPermissions
 import com.aminography.foursquareapp.presentation.ui.launch
-import com.aminography.foursquareapp.presentation.ui.venues.adapter.VenueListAdapter
-import com.aminography.foursquareapp.presentation.ui.venues.dataholder.VenueItemDataHolder
+import com.aminography.foursquareapp.presentation.ui.recommendations.adapter.VenueListAdapter
+import com.aminography.foursquareapp.presentation.ui.recommendations.dataholder.VenueItemDataHolder
 import kotlinx.android.synthetic.main.fragment_venue_recommendations.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

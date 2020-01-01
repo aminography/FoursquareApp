@@ -1,4 +1,4 @@
-package com.aminography.foursquareapp.presentation.ui.venues.viewholder
+package com.aminography.foursquareapp.presentation.ui.recommendations.viewholder
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -8,7 +8,7 @@ import com.aminography.foursquareapp.R
 import com.aminography.foursquareapp.core.tools.splitVenueName
 import com.aminography.foursquareapp.presentation.ui.base.BaseAdapter
 import com.aminography.foursquareapp.presentation.ui.loadImage
-import com.aminography.foursquareapp.presentation.ui.venues.dataholder.VenueItemDataHolder
+import com.aminography.foursquareapp.presentation.ui.recommendations.dataholder.VenueItemDataHolder
 import kotlinx.android.synthetic.main.list_item_venue.view.*
 import java.util.*
 

@@ -6,7 +6,7 @@ import com.aminography.foursquareapp.data.datasource.local.db.venue.VenueEntity
 import com.aminography.foursquareapp.data.datasource.remote.webservice.response.venue.VenueDetailsResponseModel
 import com.aminography.foursquareapp.data.datasource.remote.webservice.response.venue.VenueRecommendationsResponseModel
 import com.aminography.foursquareapp.presentation.ui.details.VenueDetailsDataHolder
-import com.aminography.foursquareapp.presentation.ui.venues.dataholder.VenueItemDataHolder
+import com.aminography.foursquareapp.presentation.ui.recommendations.dataholder.VenueItemDataHolder
 import java.text.SimpleDateFormat
 import java.util.*
 

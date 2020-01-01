@@ -14,7 +14,7 @@ import com.aminography.foursquareapp.domain.repository.IVenueRecommendationsRepo
 import com.aminography.foursquareapp.domain.toVenueEntity
 import com.aminography.foursquareapp.domain.toVenueItemDataHolder
 import com.aminography.foursquareapp.presentation.ui.concat
-import com.aminography.foursquareapp.presentation.ui.venues.dataholder.VenueItemDataHolder
+import com.aminography.foursquareapp.presentation.ui.recommendations.dataholder.VenueItemDataHolder
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
