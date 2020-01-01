@@ -9,19 +9,18 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aminography.foursquareapp.R
-import com.aminography.foursquareapp.data.base.Status
 import com.aminography.foursquareapp.core.logic.location.LocationProvider
 import com.aminography.foursquareapp.core.logic.location.LocationResponse
-import com.aminography.foursquareapp.presentation.viewmodel.VenueRecommendationsViewModel
-import com.aminography.foursquareapp.presentation.ui.base.BaseAdapter
+import com.aminography.foursquareapp.data.base.Status
+import com.aminography.foursquareapp.domain.data.VenueItemData
+import com.aminography.foursquareapp.presentation.ui.animateCompat
 import com.aminography.foursquareapp.presentation.ui.base.BaseFragment
 import com.aminography.foursquareapp.presentation.ui.base.OnListItemClickListener
 import com.aminography.foursquareapp.presentation.ui.details.VenueDetailsBottomSheet
-import com.aminography.foursquareapp.presentation.ui.animateCompat
 import com.aminography.foursquareapp.presentation.ui.hasPermissions
 import com.aminography.foursquareapp.presentation.ui.launch
 import com.aminography.foursquareapp.presentation.ui.recommendations.adapter.VenueListAdapter
-import com.aminography.foursquareapp.presentation.ui.recommendations.dataholder.VenueItemDataHolder
+import com.aminography.foursquareapp.presentation.viewmodel.VenueRecommendationsViewModel
 import kotlinx.android.synthetic.main.fragment_venue_recommendations.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -209,9 +208,9 @@ class VenueRecommendationsFragment : BaseFragment(R.layout.fragment_venue_recomm
         }
     }
 
-    override fun onItemClicked(dataHolder: BaseAdapter.BaseDataHolder) {
-        if (dataHolder is VenueItemDataHolder) {
-            VenueDetailsBottomSheet.newInstance(dataHolder.data.venueId).show(parentFragmentManager)
+    override fun <DH> onItemClicked(dataHolder: DH) {
+        if (dataHolder is VenueItemData) {
+            VenueDetailsBottomSheet.newInstance(dataHolder.venueId).show(parentFragmentManager)
         }
     }
 

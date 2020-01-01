@@ -7,6 +7,6 @@ package com.aminography.foursquareapp.presentation.ui.base
  */
 interface OnListItemClickListener {
 
-    fun onItemClicked(dataHolder: BaseAdapter.BaseDataHolder)
+    fun <DH> onItemClicked(dataHolder: DH)
 
 }

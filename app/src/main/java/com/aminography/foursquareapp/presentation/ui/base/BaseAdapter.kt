@@ -12,20 +12,21 @@ import androidx.recyclerview.widget.RecyclerView
  *
  * @author aminography
  */
-abstract class BaseAdapter<DH : BaseAdapter.BaseDataHolder, VH : BaseAdapter.BaseViewHolder> :
+abstract class BaseAdapter<DH, VH : BaseAdapter.BaseViewHolder> :
     RecyclerView.Adapter<VH>() {
 
-    protected var diffUtilCallback: DiffUtil.ItemCallback<DH> = object : DiffUtil.ItemCallback<DH>() {
+    protected var diffUtilCallback: DiffUtil.ItemCallback<DH> =
+        object : DiffUtil.ItemCallback<DH>() {
 
-        override fun areItemsTheSame(new: DH, old: DH): Boolean {
-            return new === old
-        }
+            override fun areItemsTheSame(new: DH, old: DH): Boolean {
+                return new === old
+            }
 
-        @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(new: DH, old: DH): Boolean {
-            return new == old
+            @SuppressLint("DiffUtilEquals")
+            override fun areContentsTheSame(new: DH, old: DH): Boolean {
+                return new == old
+            }
         }
-    }
 
     private val differ by lazy {
         AsyncListDiffer(this, diffUtilCallback)
@@ -36,7 +37,6 @@ abstract class BaseAdapter<DH : BaseAdapter.BaseDataHolder, VH : BaseAdapter.Bas
     override fun onBindViewHolder(viewHolder: VH, position: Int) {
         if (position < differ.currentList.size) {
             differ.currentList[position].apply {
-                listPosition = position
                 viewHolder.bindDataToView(this)
             }
         }
@@ -44,7 +44,7 @@ abstract class BaseAdapter<DH : BaseAdapter.BaseDataHolder, VH : BaseAdapter.Bas
 
     override fun getItemCount(): Int = differ.currentList.size
 
-    fun getItem(position: Int): BaseDataHolder = differ.currentList[position]
+    fun getItem(position: Int): DH = differ.currentList[position]
 
     fun submitList(list: List<DH>) {
         differ.submitList(list)
@@ -65,11 +65,9 @@ abstract class BaseAdapter<DH : BaseAdapter.BaseDataHolder, VH : BaseAdapter.Bas
         }
     }
 
-    abstract class BaseDataHolder(var listPosition: Int = RecyclerView.NO_POSITION)
-
     abstract class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        abstract fun <DH : BaseDataHolder> bindDataToView(dataHolder: DH)
+        abstract fun <DH> bindDataToView(dataHolder: DH)
     }
 
 }
