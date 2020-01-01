@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  * @author aminography
  */
 @Suppress("EXPERIMENTAL_API_USAGE")
-abstract class NetworkBoundResource<ResultType, ResponseType, QueryType>(private val coroutineScope: CoroutineScope) {
+abstract class NetworkBoundResource<QueryType, ResponseType, ResultType>(private val coroutineScope: CoroutineScope) {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, exception ->
         Log.w("CoroutineExHan", "$javaClass -> Caught: $exception")

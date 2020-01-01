@@ -8,9 +8,9 @@ import com.aminography.foursquareapp.data.datasource.local.db.details.VenueDetai
 import com.aminography.foursquareapp.data.datasource.remote.RemoteDataSource
 import com.aminography.foursquareapp.data.datasource.remote.webservice.response.venue.VenueDetailsResponseModel
 import com.aminography.foursquareapp.domain.repository.IVenueDetailsRepository
-import com.aminography.foursquareapp.presentation.ui.details.VenueDetailsDataHolder
 import com.aminography.foursquareapp.domain.toVenueDetailsDataHolder
 import com.aminography.foursquareapp.domain.toVenueDetailsEntity
+import com.aminography.foursquareapp.presentation.ui.details.VenueDetailsDataHolder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -30,10 +30,10 @@ class VenueDetailsRepository internal constructor(
     private lateinit var coroutineScope: CoroutineScope
 
     private val resource: NetworkBoundResource<
-            VenueDetailsEntity, VenueDetailsResponseModel, String> by lazy {
+            String, VenueDetailsResponseModel, VenueDetailsEntity> by lazy {
 
         object : NetworkBoundResource<
-                VenueDetailsEntity, VenueDetailsResponseModel, String>(coroutineScope) {
+                String, VenueDetailsResponseModel, VenueDetailsEntity>(coroutineScope) {
 
             override suspend fun loadFromDb(query: String): VenueDetailsEntity? {
                 return localDataSource.loadVenueDetails(query)
@@ -64,8 +64,8 @@ class VenueDetailsRepository internal constructor(
         }
     }
 
+    @Suppress("EXPERIMENTAL_API_USAGE")
     private val flow by lazy {
-        @Suppress("EXPERIMENTAL_API_USAGE")
         resource.asFlow()
             .map { resource ->
                 resource.map { entity ->

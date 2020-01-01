@@ -1,9 +1,7 @@
 package com.aminography.foursquareapp.presentation.viewmodel
 
 import androidx.lifecycle.*
-import com.aminography.foursquareapp.data.base.Resource
 import com.aminography.foursquareapp.domain.LoadVenueRecommendations
-import com.aminography.foursquareapp.presentation.ui.venues.dataholder.VenueItemDataHolder
 import com.aminography.foursquareapp.presentation.viewmodel.base.AbsentLiveData
 import com.google.android.gms.maps.model.LatLng
 

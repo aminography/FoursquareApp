@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 class LoadVenueRecommendations internal constructor(
     private val repo: IVenueRecommendationsRepository
-) : BaseUseCase<Flow<Resource<List<VenueItemDataHolder>>>, LatLng>() {
+) : BaseUseCase<LatLng, Flow<Resource<List<VenueItemDataHolder>>>>() {
 
     override fun execute(
         coroutineScope: CoroutineScope,

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 class LoadVenueDetails internal constructor(
     private val repo: IVenueDetailsRepository
-) : BaseUseCase<Flow<Resource<VenueDetailsDataHolder>>, String>() {
+) : BaseUseCase<String, Flow<Resource<VenueDetailsDataHolder>>>() {
 
     override fun execute(
         coroutineScope: CoroutineScope,

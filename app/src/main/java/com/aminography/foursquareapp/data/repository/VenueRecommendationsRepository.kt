@@ -45,10 +45,10 @@ class VenueRecommendationsRepository internal constructor(
     private lateinit var coroutineScope: CoroutineScope
 
     private val resource: NetworkBoundResource<
-            List<VenueEntity>, VenueRecommendationsResponseModel, LatLng> by lazy {
+            LatLng, VenueRecommendationsResponseModel, List<VenueEntity>> by lazy {
 
         object : NetworkBoundResource<
-                List<VenueEntity>, VenueRecommendationsResponseModel, LatLng>(coroutineScope) {
+                LatLng, VenueRecommendationsResponseModel, List<VenueEntity>>(coroutineScope) {
 
             override suspend fun loadFromDb(query: LatLng): List<VenueEntity>? {
                 needMoreItemsFromNetwork = false
@@ -138,8 +138,8 @@ class VenueRecommendationsRepository internal constructor(
         }
     }
 
+    @Suppress("EXPERIMENTAL_API_USAGE")
     private val flow by lazy {
-        @Suppress("EXPERIMENTAL_API_USAGE")
         resource.asFlow()
             .map { resource ->
                 resource.map { entityList ->
