@@ -2,15 +2,15 @@ package com.aminography.foursquareapp.data.repository
 
 import com.aminography.foursquareapp.data.base.NetworkBoundResource
 import com.aminography.foursquareapp.data.base.Resource
-import com.aminography.foursquareapp.data.base.mapData
+import com.aminography.foursquareapp.data.base.mapDataNotNull
 import com.aminography.foursquareapp.data.datasource.local.LocalDataSource
 import com.aminography.foursquareapp.data.datasource.local.db.details.VenueDetailsEntity
 import com.aminography.foursquareapp.data.datasource.remote.RemoteDataSource
 import com.aminography.foursquareapp.data.datasource.remote.webservice.response.venue.VenueDetailsResponseModel
-import com.aminography.foursquareapp.domain.repository.IVenueDetailsRepository
-import com.aminography.foursquareapp.domain.toVenueDetailsModel
-import com.aminography.foursquareapp.domain.toVenueDetailsEntity
 import com.aminography.foursquareapp.domain.model.VenueDetailsModel
+import com.aminography.foursquareapp.domain.repository.IVenueDetailsRepository
+import com.aminography.foursquareapp.domain.toVenueDetailsEntity
+import com.aminography.foursquareapp.domain.toVenueDetailsModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -68,8 +68,8 @@ class VenueDetailsRepository internal constructor(
     private val flow by lazy {
         resource.asFlow()
             .map { resource ->
-                resource.mapData { entity ->
-                    entity?.toVenueDetailsModel()
+                resource.mapDataNotNull { entity ->
+                    entity.toVenueDetailsModel()
                 }
             }
             .flowOn(Dispatchers.Default)

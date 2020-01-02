@@ -4,7 +4,7 @@ import com.aminography.foursquareapp.core.logic.decision.FetchDecisionMaker
 import com.aminography.foursquareapp.core.logic.network.NetworkChecker
 import com.aminography.foursquareapp.data.base.NetworkBoundResource
 import com.aminography.foursquareapp.data.base.Resource
-import com.aminography.foursquareapp.data.base.mapData
+import com.aminography.foursquareapp.data.base.mapDataNotNull
 import com.aminography.foursquareapp.data.datasource.local.LocalDataSource
 import com.aminography.foursquareapp.data.datasource.local.db.location.LocationEntity
 import com.aminography.foursquareapp.data.datasource.local.db.venue.VenueEntity
@@ -142,8 +142,8 @@ class VenueRecommendationsRepository internal constructor(
     private val flow by lazy {
         resource.asFlow()
             .map { resource ->
-                resource.mapData { list ->
-                    list?.map { entity ->
+                resource.mapDataNotNull { list ->
+                    list.map { entity ->
                         entity.toVenueItemModel()
                     }
                 }
